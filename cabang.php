@@ -35,6 +35,16 @@
 		echo "<script>alert('Data berhasil terhapus!');</script>";
 	}
 
+	// mencari data
+	if (isset($_POST['btn_cari'])) {
+		$input_search = $_POST['keyword_cari'];
+
+		$query = "SELECT * FROM dt_cabang WHERE ID_cabang LIKE '%$input_search%' OR Nama_cabang LIKE '%$input_search%'
+		OR Penanggung_jawab LIKE '%$input_search%' OR Jumlah_anggota LIKE '%$input_search%'";
+
+		$showData = mysqli_query($koneksi, $query);
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -92,10 +102,21 @@
 
 		.tabel-data table {
 			margin-top: 12px;
+			width: 100%;
 		}
 
 		.tabel-data table tr th, td {
 			padding: 5px 10px;
+		}
+
+		.tabel-data .header {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.header .search input {
+			height: 25px;
+			padding: 0 5px;
 		}
 
 	</style>
@@ -122,33 +143,47 @@
 				</form>
 			</div>
 			<div class="tabel-data">
-				<h2>Data Cabang</h2>
-				<table border="1" cellspacing="0">
-					<tr>
-						<th>ID Cabang</th>
-						<th>Nama Cabang</th>
-						<th>Penanggung Jawab</th>
-						<th>Jumlah Anggota</th>
-						<th>Opsi</th>
-					</tr>
-					<?php while($data = mysqli_fetch_assoc($showData)) : ?>
+				<div class="header">
+					<h2>Data Cabang</h2>
+					<div class="search">
+						<form action="" method="post">
+							<input type="search" placeholder="Search" name="keyword_cari" id="keyword_cari">
+							<button type="submit" name="btn_cari" id="btn_cari">Cari</button>
+						</form>
+					</div>
+				</div>
+				<div id="tabel_data">
+					<table border="1" cellspacing="0">
 						<tr>
-							<td><?= $data['ID_cabang'];?></td>
-							<td><?= $data['Nama_cabang'];?></td>
-							<td><?= $data['Penanggung_jawab'];?></td>
-							<td><?= $data['Jumlah_anggota'];?></td>
-							<td>
-								<a href="edit_dt_cabang.php?update=<?= $data['ID_cabang'];?>"><button type="button">Edit</button></a>
-								<a href="?delete=<?= $data['ID_cabang'];?>"><button type="button" onclick=" return confirm('Yakin ingin menghapus?')">Hapus</button></a>
-							</td>
+							<th>ID Cabang</th>
+							<th>Nama Cabang</th>
+							<th>Penanggung Jawab</th>
+							<th>Jumlah Anggota</th>
+							<th>Opsi</th>
 						</tr>
-					<?php endwhile; ?>
-				</table>
+						<?php while($data = mysqli_fetch_assoc($showData)) : ?>
+							<tr>
+								<td><?= $data['ID_cabang'];?></td>
+								<td><?= $data['Nama_cabang'];?></td>
+								<td><?= $data['Penanggung_jawab'];?></td>
+								<td><?= $data['Jumlah_anggota'];?></td>
+								<td>
+									<center>
+										<a href="edit_dt_cabang.php?update=<?= $data['ID_cabang'];?>"><button type="button">Edit</button></a>
+										<a href="?delete=<?= $data['ID_cabang'];?>"><button type="button" onclick=" return confirm('Yakin ingin menghapus?')">Hapus</button></a>
+									</center>
+								</td>
+							</tr>
+						<?php endwhile; ?>
+					</table>
+				</div>	
 				<footer>
 					<?php require 'modularitas/footer.php' ?>
 				</footer>
 			</div>
 		</div>
 	</main>
+
+	<script type="text/javascript" src="js/cabang.js"></script>
 </body>
 </html>

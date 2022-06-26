@@ -36,6 +36,16 @@
 		echo "<script>alert('Data berhasil terhapus!');</script>";
 	}
 
+	// mencari data
+	if (isset($_POST['btn_cari'])) {
+		$input_search = $_POST['keyword_cari'];
+
+		$query = "SELECT * FROM dt_pelatih WHERE ID_pelatih LIKE '%$input_search%' OR Nama_pelatih LIKE '%$input_search%'
+		OR Tanggal_lahir LIKE '%$input_search%' OR Jenis_kelamin LIKE '%$input_search%' OR Sabuk LIKE '%$input_search%'";
+
+		$showData = mysqli_query($koneksi, $query);
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -99,10 +109,21 @@
 
 		.tabel-data table {
 			margin-top: 12px;
+			width: 100%;
 		}
 
 		.tabel-data table tr th, td {
 			padding: 5px 10px;
+		}
+
+		.tabel-data .header {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.header .search input {
+			height: 25px;
+			padding: 0 5px;
 		}
 
 	</style>
@@ -142,35 +163,49 @@
 				</form>
 			</div>
 			<div class="tabel-data">
-				<h2>Data Pelatih</h2>
-				<table border="1" cellspacing="0">
-					<tr>
-						<th>ID Pelatih</th>
-						<th>Nama Pelatih</th>
-						<th>Tanggal Lahir</th>
-						<th>Jenis Kelamin</th>
-						<th>Sabuk</th>
-						<th>Opsi</th>
-					</tr>
-					<?php while($data = mysqli_fetch_assoc($showData)) : ?>
+				<div class="header">
+					<h2>Data Pelatih</h2>
+					<div class="search">
+						<form action="" method="post">
+							<input type="search" placeholder="Search" name="keyword_cari" id="keyword_cari">
+							<button type="submit" name="btn_cari" id="btn_cari">Cari</button>
+						</form>
+					</div>
+				</div>
+				<div id="tabel_data">
+					<table border="1" cellspacing="0">
 						<tr>
-							<td><?= $data['ID_pelatih'];?></td>
-							<td><?= $data['Nama_pelatih'];?></td>
-							<td><?= $data['Tanggal_lahir'];?></td>
-							<td><?= $data['Jenis_kelamin'];?></td>
-							<td><?= $data['Sabuk'];?></td>
-							<td>
-								<a href="edit_dt_pelatih.php?update=<?= $data['ID_pelatih'];?>"><button type="button">Edit</button></a>
-								<a href="?delete=<?= $data['ID_pelatih'];?>"><button type="button" onclick=" return confirm('Yakin ingin menghapus?')">Hapus</button></a>
-							</td>
+							<th>ID Pelatih</th>
+							<th>Nama Pelatih</th>
+							<th>Tanggal Lahir</th>
+							<th>Jenis Kelamin</th>
+							<th>Sabuk</th>
+							<th>Opsi</th>
 						</tr>
-					<?php endwhile; ?>
-				</table>
+						<?php while($data = mysqli_fetch_assoc($showData)) : ?>
+							<tr>
+								<td><?= $data['ID_pelatih'];?></td>
+								<td><?= $data['Nama_pelatih'];?></td>
+								<td><?= $data['Tanggal_lahir'];?></td>
+								<td><?= $data['Jenis_kelamin'];?></td>
+								<td><?= $data['Sabuk'];?></td>
+								<td>
+									<center>
+										<a href="edit_dt_pelatih.php?update=<?= $data['ID_pelatih'];?>"><button type="button">Edit</button></a>
+										<a href="?delete=<?= $data['ID_pelatih'];?>"><button type="button" onclick=" return confirm('Yakin ingin menghapus?')">Hapus</button></a>
+									</center>
+								</td>
+							</tr>
+						<?php endwhile; ?>
+					</table>
+				</div>
 				<footer>
 					<?php require 'modularitas/footer.php' ?>
 				</footer>
 			</div>
 		</div>
 	</main>
+
+	<script type="text/javascript" src="js/pelatih.js"></script>
 </body>
 </html>

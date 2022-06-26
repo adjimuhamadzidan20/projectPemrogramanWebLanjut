@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jun 2022 pada 06.40
+-- Waktu pembuatan: 26 Jun 2022 pada 15.26
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 7.4.13
 
@@ -85,7 +85,8 @@ CREATE TABLE `dt_jadwal_latihan` (
 --
 
 INSERT INTO `dt_jadwal_latihan` (`ID_latihan`, `Hari`, `ID_pelatih`, `ID_cabang`) VALUES
-(1401, 'Rabu', 1201, 1101);
+(1401, 'Rabu', 1201, 1101),
+(1406, 'Jumat', 1203, 1104);
 
 -- --------------------------------------------------------
 
@@ -189,7 +190,7 @@ ALTER TABLE `dt_cabang`
 -- AUTO_INCREMENT untuk tabel `dt_jadwal_latihan`
 --
 ALTER TABLE `dt_jadwal_latihan`
-  MODIFY `ID_latihan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1406;
+  MODIFY `ID_latihan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1407;
 
 --
 -- AUTO_INCREMENT untuk tabel `dt_keuangan`
