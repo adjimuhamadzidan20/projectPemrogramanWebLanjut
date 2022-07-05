@@ -13,7 +13,7 @@
 
 ?>
 
-	<table border="1" cellspacing="0">
+	<table border="0" cellspacing="0">
 		<tr>
 			<th>ID Keuangan</th>
 			<th>Tanggal Pembayaran</th>

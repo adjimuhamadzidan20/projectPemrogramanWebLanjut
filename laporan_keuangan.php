@@ -16,8 +16,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Laporan Keuangan</title>
+	<link rel="stylesheet" href="fontawesome/css/all.min.css">
 	<!-- css data keuangan -->
 	<style>
+		body {
+			font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+		}
+
 		main .container {
 			display: flex;
 			justify-content: center;
@@ -25,15 +30,6 @@
 			position: fixed;
 		  	width: 100%;
 		  	height: 100%;
-		}
-
-		
-		main .container .simpan {
-			cursor: pointer;
-			padding: 4px 2px;
-			box-sizing: border-box;
-			width: 70px;
-			margin-top: 15px;
 		}
 
 		.tabel-data {
@@ -45,31 +41,41 @@
 		.tabel-data table {
 			margin-top: 12px;
 			width: 100%;
+			background-color: #F9F9F9;
+			border: none;
 			text-align: center;
 		}
 
-		.tabel-data table tr th, td {
-			padding: 5px 8px;
+		.tabel-data table th {
+			background-color: #2c2c54;
+			color: white;
 		}
 
-		main .tabel-data table .edit, .hapus {
+		.tabel-data table tr th, td {
+			padding: 6px 8px;
+		}
+
+		.tabel-data button {
 			cursor: pointer;
-			padding: 4px 2px;
+			padding: 6px 2px;
 			box-sizing: border-box;
-			width: 70px;
+			width: 80px;
+			border: 1px solid grey;
+		}
+
+		.tabel-data button:hover {
+			background-color: #dfe4ea;
+			transition: 0.1s;
 		}
 
 	</style>
 </head>
 <body>
-	<nav>
-		<?php require 'modularitas/menu.php' ?>
-	</nav>
 	<main>
 		<div class="container">
 			<div class="tabel-data">
 				<h2>Laporan Keuangan</h2>
-				<table border="1" cellspacing="0">
+				<table border="0" cellspacing="0">
 					<tr>
 						<th>ID Anggota</th>
 						<th>Nama Lengkap</th>
@@ -87,12 +93,14 @@
 						</tr>
 					<?php endwhile; ?>
 				</table><br>
-				<a href="keuangan.php">Kembali</a>
+				<a href="keuangan.php"><button type="button"><i class="fa-solid fa-arrow-left"></i> Kembali</button></a>
 				<footer>
 					<?php require 'modularitas/footer.php' ?>
 				</footer>
 			</div>
 		</div>
 	</main>
+
+	<script type="text/javascript" src="fontawesome/js/all.min.js"></script>
 </body>
 </html>

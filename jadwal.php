@@ -60,8 +60,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Jadwal Latihan</title>
+	<link rel="stylesheet" href="fontawesome/css/all.min.css">
 	<!-- css data keuangan -->
 	<style>
+		body {
+			font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+		}
+
 		main .container {
 			display: flex;
 			justify-content: center;
@@ -71,19 +76,24 @@
 		  	height: 100%;
 		}
 
-		main .container .simpan {
+		main .container button {
 			cursor: pointer;
-			padding: 4px 2px;
+			padding: 6px 2px;
 			box-sizing: border-box;
 			width: 70px;
-			margin-top: 15px;
+			border: none;
+		}
+
+		main .container button:hover {
+			background-color: #dfe4ea;
 		}
 
 		.form {
-			background-color: #2c3e50;
+			background-color: #2c2c54;
 			width: 25%;
 			color: white;
 			padding: 40px 20px;
+			box-shadow: 5px 0 4px lightgrey;
 		}
 
 		.form .title-jadwal {
@@ -98,7 +108,7 @@
 		.form form #hari_latihan {
 			margin-top: 4px;
 			margin-bottom: 12px;
-			width: 220px;
+			width: 260px;
 			height: 20px;
 			padding: 2px;
 		}
@@ -106,7 +116,7 @@
 		.form form #cabang, #pelatih {
 			margin-top: 4px;
 			/*margin-bottom: 5px;*/
-			width: 220px;
+			width: 260px;
 			height: 20px;
 			padding: 2px;
 		}
@@ -125,6 +135,25 @@
 			margin-top: 12px;
 		}
 
+		.form .kembali {
+			position: absolute;
+			bottom: 0;
+			padding: 15px 0;
+		}
+
+		.form form #simpan {
+			cursor: pointer;
+			padding: 7px 2px;
+			box-sizing: border-box;
+			width: 268px;
+			margin-top: 10px;
+		}
+
+		.form form #simpan:hover {
+			background-color: #dfe4ea;
+			transition: 0.1s;
+		}
+
 		.tabel-data {
 			width: 75%;
 			padding: 40px 20px;
@@ -133,17 +162,19 @@
 		.tabel-data table {
 			margin-top: 12px;
 			width: 100%;
+			background-color: #F9F9F9;
+			border: none;
+			text-align: center;
+			font-size: 14px;
+		}
+
+		.tabel-data table th {
+			background-color: #2c2c54;
+			color: white;
 		}
 
 		.tabel-data table tr th, td {
-			padding: 5px 10px;
-		}
-
-		main .tabel-data table .edit, .hapus {
-			cursor: pointer;
-			padding: 4px 2px;
-			box-sizing: border-box;
-			width: 70px;
+			padding: 6px 10px;
 		}
 
 		.tabel-data .header {
@@ -156,19 +187,26 @@
 			padding: 0 5px;
 		}
 
-		.header .search #btn_cari {
+		.tabel-data #laporan {
 			cursor: pointer;
-			padding: 4px 2px;
+			padding: 6px 2px;
 			box-sizing: border-box;
-			width: 70px;
+			width: 200px;
+			border: 1px solid lightgrey;
+		}
+
+		#btn_cari, #edit, #hapus {
+			border: 1px solid lightgrey;
+		}
+
+		.tabel-data #tabel_data {
+			overflow-y: auto;
+			height: 93%;
 		}
 
 	</style>
 </head>
 <body>
-	<nav>
-		<?php require 'modularitas/menu.php' ?>
-	</nav>
 	<main>
 		<div class="container">
 			<div class="form">
@@ -187,8 +225,11 @@
 						<input type="text" id="cabang" name="cabang" required><br>
 						<a href="cabang.php">*lihat data cabang</a><br>
 					</div>
-					<button type="submit" name="simpan" class="simpan">Simpan</button>
+					<button type="submit" name="simpan" id="simpan"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
 				</form>
+				<div class="kembali">
+					<?php require 'modularitas/btn_kembali.php'; ?>
+				</div>
 			</div>
 			<div class="tabel-data">
 				<div class="header">
@@ -196,13 +237,13 @@
 					<div class="search">
 						<form action="" method="post">
 							<input type="search" placeholder="Search" name="keyword_cari" id="keyword_cari">
-							<button type="submit" name="btn_cari" id="btn_cari">Cari</button>
+							<button type="submit" name="btn_cari" id="btn_cari"><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
 						</form>
 					</div>
 				</div><br>
-				<a href="laporan_jadwal.php">Laporan Jadwal</a>
+				<a href="laporan_jadwal.php"><button type="button" id="laporan">Laporan Jadwal</button></a>
 				<div id="tabel_data">
-					<table border="1" cellspacing="0">
+					<table border="0" cellspacing="0">
 						<tr>
 							<th>ID Latihan</th>
 							<th>Hari Latihan</th>
@@ -222,8 +263,8 @@
 								<td><?= $data['ID_cabang'];?></td>
 								<td>
 									<center>
-										<a href="edit_dt_jadwal.php?update=<?= $data['ID_latihan'];?>"><button type="button" class="edit">Edit</button></a>
-										<a href="?delete=<?= $data['ID_latihan'];?>"><button type="button" onclick=" return confirm('Yakin ingin menghapus?')" class="hapus">Hapus</button></a>
+										<a href="edit_dt_jadwal.php?update=<?= $data['ID_latihan'];?>"><button type="button" id="edit"><i class="fa-solid fa-file-pen"></i> Edit</button></a>
+										<a href="hapus_jadwal.php?delete=<?= $data['ID_latihan'];?>"><button type="button" onclick=" return confirm('Yakin ingin menghapus?')" id="hapus"><i class="fa-solid fa-trash-can"></i> Hapus</button></a>
 									</center>
 								</td>
 							</tr>
@@ -238,5 +279,6 @@
 	</main>
 
 	<script type="text/javascript" src="js/jadwal.js"></script>
+	<script type="text/javascript" src="fontawesome/js/all.min.js"></script>
 </body>
 </html>

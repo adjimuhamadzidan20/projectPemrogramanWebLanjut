@@ -40,8 +40,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Anggota</title>
+	<link rel="stylesheet" href="fontawesome/css/all.min.css">
 	<!-- css anggota -->
 	<style>
+		body {
+			font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+		}
+		
 		main .container {
 			display: flex;
 			justify-content: center;
@@ -53,16 +58,23 @@
 
 		main .container button {
 			cursor: pointer;
-			padding: 4px 2px;
-			width: 228px;
-			margin-bottom: 10px;
+			padding: 6px 2px;
+			box-sizing: border-box;
+			width: 268px;
+			border: none;
+			margin-top: 16px;
+		}
+
+		main .container button:hover {
+			background-color: #dfe4ea;
 		}
 
 		.form {
-			background-color: #2c3e50;
+			background-color: #2c2c54;
 			width: 25%;
 			color: white;
 			padding: 35px 20px;
+			box-shadow: 5px 0 4px lightgrey;
 		}
 
 		.form .title-anggota {
@@ -77,14 +89,14 @@
 		.form form input, select {
 			margin-top: 4px;
 			margin-bottom: 10px;
-			width: 220px;
+			width: 260px;
 			height: 20px;
 			padding: 2px;
 		}
 
 		.form form select {
 			height: 28px;
-			width: 228px;
+			width: 268px;
 			cursor: pointer;
 		}
 
@@ -95,18 +107,24 @@
 
 		.tabel-data table {
 			margin-top: 12px;
+			width: 100%;
+			background-color: #F9F9F9;
+			border: none;
+			text-align: center;
+		}
+
+		.tabel-data table th {
+			background-color: #2c2c54;
+			color: white;
 		}
 
 		.tabel-data table tr th, td {
-			padding: 5px 10px;
+			padding: 6px 10px;
 		}
 
 	</style>
 </head>
 <body>
-	<nav>
-		<?php require 'modularitas/menu.php' ?>
-	</nav>
 	<main>
 		<div class="container">
 			<div class="form">
@@ -137,15 +155,15 @@
 						<option value="Hijau">Hitam</option>
 					</select><br>
 
-					<button type="submit" name="edit_data" onclick="return confirm('Update data?');">Edit Data</button>
+					<button type="submit" name="edit_data" onclick="return confirm('Update data?');"><i class="fa-solid fa-file-pen"></i> Edit Data</button>
 					<a href="anggota.php">
-						<button type="button">Kembali</button>
+						<button type="button"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
 					</a>
 				</form>
 			</div>
 			<div class="tabel-data">
 				<h2>Data Anggota</h2>
-				<table border="1" cellspacing="0">
+				<table border="0" cellspacing="0">
 					<tr>
 						<th>ID Anggota</th>
 						<th>Nama Lengkap</th>
@@ -167,5 +185,7 @@
 			</div>
 		</div>
 	</main>
+
+	<script type="text/javascript" src="fontawesome/js/all.min.js"></script>
 </body>
 </html>
