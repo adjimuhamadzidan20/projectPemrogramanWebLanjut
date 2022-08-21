@@ -2,6 +2,12 @@
 	// koneksi
 	require 'config/koneksi_db.php';
 
+	session_start();
+	if (!isset($_SESSION['login_admin'])) {
+		header('Location: login.php');
+		exit;
+	}
+
 	// menampilkan data
 	// $show = "SELECT * FROM dt_anggota";
 	// $showData = mysqli_query($koneksi, $show);

@@ -2,6 +2,12 @@
 	// koneksi
 	require 'config/koneksi_db.php';
 
+	session_start();
+	if (!isset($_SESSION['login_admin'])) {
+		header('Location: login.php');
+		exit;
+	}
+
 	// show data
 	$show = "SELECT * FROM dt_jadwal_latihan 
 	INNER JOIN dt_pelatih ON dt_jadwal_latihan.ID_pelatih = dt_pelatih.ID_pelatih 

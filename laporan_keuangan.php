@@ -2,6 +2,12 @@
 	// koneksi
 	require 'config/koneksi_db.php';
 
+	session_start();
+	if (!isset($_SESSION['login_admin'])) {
+		header('Location: login.php');
+		exit;
+	}
+
 	// show data
 	$show = "SELECT dt_anggota.ID_anggota, dt_anggota.Nama_lengkap, dt_keuangan.Tanggal_Pembayaran,dt_keuangan.Nominal, 
 	dt_keuangan.Keterangan FROM dt_anggota, dt_keuangan WHERE dt_anggota.ID_anggota = dt_keuangan.ID_anggota";

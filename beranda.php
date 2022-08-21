@@ -1,9 +1,22 @@
+<?php
+	session_start();
+
+	$_SESSION['beranda'] = true;
+
+	if (!isset($_SESSION['login_admin'])) {
+		header('Location: login.php');
+		exit;
+	}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home</title>
+	<link rel="stylesheet" href="fontawesome/css/all.min.css">
 	<style>
 		* {
 			margin: 0;
@@ -78,6 +91,22 @@
 			text-decoration: none;
 		}
 
+		.logout {
+			text-align: center;
+			margin-top: 30px;
+		}
+
+		.logout button {
+			width: 100px;
+			padding: 5px 0;
+			border: 1px solid grey;
+			cursor: pointer;
+		}
+
+		.logout button:hover {
+			background-color: lightgrey;
+		}
+
 	</style>
 </head>
 <body>
@@ -123,6 +152,9 @@
 				</div>
 			</a>
 		</div>
+	</div>
+	<div class="logout">
+		<a href="logout.php"><button><i class="fas fa-sign-out-alt"></i> LOGOUT</button></a>
 	</div>
 </body>
 </html>
